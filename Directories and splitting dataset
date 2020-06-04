@@ -1,0 +1,13 @@
+#здесь нужно подставить директорию к скачанному датасету
+TRAIN_DIR = Path(r'data\feathersv1-dataset-master\feathersv1-dataset-master\images')
+TEST_DIR = Path(r'data\feathersv1-dataset-master\feathersv1-dataset-master\images')
+
+train_val_files = sorted(list(TRAIN_DIR.rglob('*.jpg')))
+test_files = sorted(list(TEST_DIR.rglob('*.jpg')))
+
+from sklearn.model_selection import train_test_split
+
+train_val_labels = [path.parent.name for path in train_val_files]
+train_files, val_files = train_test_split(train_val_files,test_size=0.25, random_state=42) #делит на часть для тренировки и валидации
+
+val_dataset = FeatherDataset(val_files, mode='val')#валидационный датасет

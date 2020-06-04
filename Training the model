@@ -1,0 +1,6 @@
+if val_dataset is None:
+    val_dataset = FeatherDataset(val_files, mode='val')
+    
+train_dataset = FeatherDataset(train_files, mode='train')
+
+history = train(train_dataset, val_dataset, model=model.fc, epochs=2, batch_size=32)

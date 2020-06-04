@@ -1,0 +1,9 @@
+fig, ax = plt.subplots(nrows=3, ncols=3,figsize=(6, 15), \
+                        sharey=True, sharex=True)
+for fig_x in ax.flatten():
+    random_characters = int(np.random.uniform(0,1000))
+    im_val, label = val_dataset[random_characters]
+    img_label = " ".join(map(lambda x: x.capitalize(),\
+                val_dataset.label_encoder.inverse_transform([label])[0].split('_')))
+    imshow(im_val.data.cpu(), \
+          title=img_label,plt_ax=fig_x)
